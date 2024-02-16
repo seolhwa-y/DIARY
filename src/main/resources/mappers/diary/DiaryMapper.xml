@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.happyjob.study.repository.diary.DiaryMapper">
+	<!-- 다이어리 목록 조회 -->
+	<select id = "diaryList" resultType = "kr.happyjob.study.vo.diary.DiaryVO">
+		SELECT 
+		    d.d_no,
+		    d.loginID,
+		    d.d_title,
+		    dc_weather.detail_name AS d_weather,
+		    dc_mood.detail_name AS d_mood,
+		    d.d_contents,
+		    d.d_diarydt,
+		    d.d_regdate
+		FROM 
+		    tb_diary d
+		JOIN 
+		    tb_detail_code dc_weather ON d.d_weather = dc_weather.detail_code AND dc_weather.group_code = '2'
+		JOIN 
+		    tb_detail_code dc_mood ON d.d_mood = dc_mood.detail_code AND dc_mood.group_code = '1'
+		<where>
+			<if test ="(title != null) and (!title.equals(''))">
+			    and d.d_title  Like CONCAT('%', #{title}, '%')
+			</if>	
+		</where>
+		 ORDER BY d_diarydt DESC
+	</select>
+
+
+</mapper>
