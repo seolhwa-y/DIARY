@@ -11,26 +11,23 @@ import kr.happyjob.study.vo.register.UserVo;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
-
 @Service
 public class RegisterService {
 	@Autowired
 	RegisterMapper registerMapper;
-	
-	
+
 	// 아이디 중복검사
 	public int checkID(String loginID) {
-		
+
 		return registerMapper.checkID(loginID);
 	}
-	
+
 	// 휴대폰 중복검사
 	public int checkHp(String hp) {
 		// TODO Auto-generated method stub
 		return registerMapper.checkHp(hp);
 
 	}
-
 
 	// 휴대폰 인증
 	public void certifiedPhoneNumber(String userPhon, String cerNum) {
@@ -61,13 +58,16 @@ public class RegisterService {
 	public int register(UserVo userVo) {
 		return registerMapper.insertUser(userVo);
 	}
-	
+
 	// 아이디 비밀번호 찾기
 	public UserVo findAccount(String hp) {
 		// TODO Auto-generated method stub
 		return registerMapper.findAccount(hp);
 	}
-
-
 	
+	// 임시 비밀번호 업데이트
+	public void updateUserPassword(UserVo userVo) {
+		registerMapper.updateUserPassword(userVo.getHp(), userVo.getPassword());
+	}
+
 }

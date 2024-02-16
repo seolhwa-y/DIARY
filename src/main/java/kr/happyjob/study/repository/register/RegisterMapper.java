@@ -37,7 +37,15 @@ public interface RegisterMapper {
 	 * @return 
 	 */
 	UserVo findAccount(String hp);
-
+	
+	/**
+	 * 임시 비밀번호 업데이트
+	 * @param hp
+	 * @param password
+	 */
+	void updateUserPassword(String hp, String password);
+	
+	
 	
 	
 

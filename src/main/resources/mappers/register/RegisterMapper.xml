@@ -18,9 +18,15 @@
 	
 	<!--아이디 비밀번호 찾기-->
 	 <select id="findAccount">
-        SELECT loginID, password
+        SELECT * 
         FROM tb_userinfo
         WHERE hp = #{hp}
     </select>
-
+	<!--임시 비밀번호 업데이트-->
+	 <update id="updateUserPassword">
+        UPDATE tb_userinfo
+        SET password = #{password}
+        WHERE hp = #{hp}
+    </update>
+    
 </mapper>

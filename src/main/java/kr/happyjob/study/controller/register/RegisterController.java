@@ -2,6 +2,7 @@ package kr.happyjob.study.controller.register;
 
 import java.security.SecureRandom;
 
+import org.hibernate.boot.model.source.spi.JoinedSubclassEntitySource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,40 +19,37 @@ public class RegisterController {
 
 	@Autowired
 	RegisterService registerService;
-	
-	
+
 	// 유저ID 중복 검사
 	@PostMapping("checkID")
 	public int checkID(@RequestBody UserVo userVo) {
-		
+
 		System.out.println("userVo : " + userVo);
-		
+
 		String loginID = userVo.getLoginID();
-		
+
 		System.out.println("loginID : " + loginID);
-		
+
 		int result = registerService.checkID(loginID);
 		System.out.println("result : " + result);
 		return result;
 	}
-	
+
 	// 휴대폰 번호 중복 검사 / 가입유무
-		@PostMapping("checkHp")
-		public int checkHp(@RequestBody UserVo userVo) {
-			
-			System.out.println("userVo : " + userVo);
-			
-			String hp = userVo.getHp();
-			
-			System.out.println("loginID : " + hp);
-			
-			int result = registerService.checkHp(hp);
-			System.out.println("result : " + result);
-			return result;
-			
-			
-			
-		}  
+	@PostMapping("checkHp")
+	public int checkHp(@RequestBody UserVo userVo) {
+
+		System.out.println("userVo : " + userVo);
+
+		String hp = userVo.getHp();
+
+		System.out.println("loginID : " + hp);
+
+		int result = registerService.checkHp(hp);
+		System.out.println("result : " + result);
+		return result;
+
+	}
 
 	// 휴대폰 인증
 	@PostMapping("sendSMS")
@@ -82,26 +80,48 @@ public class RegisterController {
 	public int register(@RequestBody UserVo userVo) {
 		System.out.println("빋은 값 : " + userVo);
 		int result = registerService.register(userVo);
-		
+
 		System.out.println("result : " + result);
 
 		return result;
 	}
-	
-	//아이디 비밀번호 찾기
+
+	// 아이디 비밀번호 찾기
 	@PostMapping("findAccount")
-	public UserVo findAccount(@RequestBody UserVo userVo){
+	public UserVo findAccount(@RequestBody UserVo userVo) {
 		System.out.println("userVo : " + userVo);
-		
+
 		String hp = userVo.getHp();
-		
-		System.out.println("loginID : " + hp);
-		
+		System.out.println("hp : " + hp);
+
 		UserVo userInfo = registerService.findAccount(hp);
-		
 		System.out.println("userInfo : " + userInfo);
-		
-		return userInfo;
+		if (userInfo != null) {
+			// 비밀번호 랜덤 생성
+			String newPassword = generateRandomPassword(6);
+			// 비밀번호 업데이트
+			userInfo.setPassword(newPassword);
+			
+			registerService.updateUserPassword(userInfo);
+
+			System.out.println("변경된 비밀번호 : " + userInfo.getPassword());
+			// 업데이트된 비밀번호로 사용자 정보 반환
+			System.out.println("변경 된 userInfo : " + userInfo);
+
+			return userInfo;
+		}
+
+		return null; // 사용자 정보가 없을 경우 null 반환
 	}
 
+	// 랜덤 비밀번호
+	private String generateRandomPassword(int length) {
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder(length);
+		for (int i = 0; i < length; i++) {
+			// 0-9 사이의 숫자를 생성
+			sb.append(random.nextInt(10));
+		}
+		return sb.toString();
+	}
 }
