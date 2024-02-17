@@ -46,6 +46,9 @@ public class LgnInfoModel {
 	// 사용자 성명
 	private String usr_nm;
 	
+	// 탈퇴여
+	private String del_yn;
+	
 	// 로그린 사용자 권란       mng: 관리자       gnr: 일반
 	private String mem_author;
 
@@ -137,7 +140,13 @@ public class LgnInfoModel {
 		this.mem_author = mem_author;
 	}
 
-	
+	public String getDel_yn() {
+		return del_yn;
+	}
+
+	public void setDel_yn(String del_yn) {
+		this.del_yn = del_yn;
+	}
 	
 
 }

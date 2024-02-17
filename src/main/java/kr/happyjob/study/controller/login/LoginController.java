@@ -107,37 +107,42 @@ public class LoginController {
 
 		  
 		       if (lgnInfoModel != null) {
-		    	   result = "SUCCESS";
-		  	       resultMsg = "사용자 로그인 정보가 일치 합니다.";
-		  	       System.out.println("asdf" + lgnInfoModel.getApproval_cd());
-		  	       System.out.println("y".equals(lgnInfoModel.getApproval_cd()));
-		  	       System.out.println("asdf" + lgnInfoModel.getApproval_cd());
-		  	       System.out.println("n".equals(lgnInfoModel.getApproval_cd()));
-		  	       // 사용자 메뉴 권한 조회
-		  	       paramMap.put("usr_sst_id", lgnInfoModel.getUsr_sst_id());
-		  	       paramMap.put("userType",lgnInfoModel.getMem_author());
-		  	       // 메뉴 목록 조회 0depth
-		  	       List<UsrMnuAtrtModel> listUsrMnuAtrtModel = listUsrMnuAtrtService.listUsrMnuAtrt(paramMap);
-		  	       // 메뉴 목록 조회 1depth
-		  	       for(UsrMnuAtrtModel list : listUsrMnuAtrtModel){
-		  	          Map<String, Object> resultMapSub = new HashMap<String, Object>();
-		  	          resultMapSub.put("lgn_Id", paramMap.get("lgn_Id")); 
-		  	          resultMapSub.put("hir_mnu_id", list.getMnu_id());
-		  	          resultMapSub.put("userType",lgnInfoModel.getMem_author());
-		  	          list.setNodeList(listUsrChildMnuAtrtService.listUsrChildMnuAtrt(resultMapSub));
+		    	   if("N".equals(lgnInfoModel.getDel_yn())) {
+			    	   result = "SUCCESS";
+			  	       resultMsg = "사용자 로그인 정보가 일치 합니다.";
+			  	       System.out.println("asdf" + lgnInfoModel.getApproval_cd());
+			  	       System.out.println("y".equals(lgnInfoModel.getApproval_cd()));
+			  	       System.out.println("asdf" + lgnInfoModel.getApproval_cd());
+			  	       System.out.println("n".equals(lgnInfoModel.getApproval_cd()));
+			  	       // 사용자 메뉴 권한 조회
+			  	       paramMap.put("usr_sst_id", lgnInfoModel.getUsr_sst_id());
+			  	       paramMap.put("userType",lgnInfoModel.getMem_author());
+			  	       // 메뉴 목록 조회 0depth
+			  	       List<UsrMnuAtrtModel> listUsrMnuAtrtModel = listUsrMnuAtrtService.listUsrMnuAtrt(paramMap);
+			  	       // 메뉴 목록 조회 1depth
+			  	       for(UsrMnuAtrtModel list : listUsrMnuAtrtModel){
+			  	          Map<String, Object> resultMapSub = new HashMap<String, Object>();
+			  	          resultMapSub.put("lgn_Id", paramMap.get("lgn_Id")); 
+			  	          resultMapSub.put("hir_mnu_id", list.getMnu_id());
+			  	          resultMapSub.put("userType",lgnInfoModel.getMem_author());
+			  	          list.setNodeList(listUsrChildMnuAtrtService.listUsrChildMnuAtrt(resultMapSub));
+			  	       }
+			  	     
+			  	       session.setAttribute("loginId",lgnInfoModel.getLgn_id());                     //   로그인 ID
+			  	       session.setAttribute("userNm",lgnInfoModel.getUsr_nm());                  // 사용자 성명
+			  	       session.setAttribute("usrMnuAtrt", listUsrMnuAtrtModel);
+			  	       session.setAttribute("userType", lgnInfoModel.getMem_author());            // 로그린 사용자 권란       A: 관리자       B: 기업회원    C:일반회원
+			  	       session.setAttribute("serverName", request.getServerName());
+			  	
+			  	       resultMap.put("loginId",lgnInfoModel.getLgn_id()); 
+			  	       resultMap.put("userNm",lgnInfoModel.getUsr_nm()); 
+			  	       resultMap.put("usrMnuAtrt", listUsrMnuAtrtModel);
+			  	       resultMap.put("userType", lgnInfoModel.getMem_author());
+			  	       resultMap.put("serverName", request.getServerName());
+		  	       } else {
+		  	    	 result = "FALSE";
+			         resultMsg = "회원가입을 진행해주세요.";
 		  	       }
-		  	     
-		  	       session.setAttribute("loginId",lgnInfoModel.getLgn_id());                     //   로그인 ID
-		  	       session.setAttribute("userNm",lgnInfoModel.getUsr_nm());                  // 사용자 성명
-		  	       session.setAttribute("usrMnuAtrt", listUsrMnuAtrtModel);
-		  	       session.setAttribute("userType", lgnInfoModel.getMem_author());            // 로그린 사용자 권란       A: 관리자       B: 기업회원    C:일반회원
-		  	       session.setAttribute("serverName", request.getServerName());
-		  	
-		  	       resultMap.put("loginId",lgnInfoModel.getLgn_id()); 
-		  	       resultMap.put("userNm",lgnInfoModel.getUsr_nm()); 
-		  	       resultMap.put("usrMnuAtrt", listUsrMnuAtrtModel);
-		  	       resultMap.put("userType", lgnInfoModel.getMem_author());
-		  	       resultMap.put("serverName", request.getServerName());
 			} else {
 	
 		         result = "FALSE";
