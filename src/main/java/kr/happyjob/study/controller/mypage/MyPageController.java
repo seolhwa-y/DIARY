@@ -39,19 +39,19 @@ public class MyPageController {
 	@Autowired
 	MyPageService mps;
 	
-	
-	@SuppressWarnings("unchecked")
+
 	@RequestMapping(value = "myPage.do", method = RequestMethod.GET)
 	public Map<String, Object> myPage(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 		paramMap.put("loginId", session.getAttribute("loginId"));
 
-		return (Map<String, Object>) resultMap.put("tell", mps.getTell(paramMap));
+		resultMap.put("tell", mps.getTell(paramMap));
+		
+		return resultMap;
 	}
 
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "resign.do", method = RequestMethod.POST)
 	public Map<String, Object> resign(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -60,13 +60,14 @@ public class MyPageController {
 
 		logger.info("[ "+ className + " ]    paramMap :: " + paramMap.toString());
 		
-		int num = mps.resign(paramMap);
+		
+		if(mps.resign(paramMap) > 0)resultMap.put("MESSAGE", "SUCCESS");
+		else resultMap.put("MESSAGE", "FAIL");
 
-		return num > 0 ? (Map<String, Object>) resultMap.put("MESSAGE", "SUCCESS") : (Map<String, Object>) resultMap.put("MESSAGE", "FAIL");
+		return resultMap;
 	}
 
-	
-	@SuppressWarnings("unchecked")
+
 	@RequestMapping(value = "updInfo.do", method = RequestMethod.POST)
 	public Map<String, Object> updInfo(@RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -75,9 +76,10 @@ public class MyPageController {
 
 		paramMap.put("loginId", session.getAttribute("loginId"));
 		
-		int num = mps.updInfo(paramMap);
+		if(mps.updInfo(paramMap) > 0)resultMap.put("MESSAGE", "SUCCESS");
+		else resultMap.put("MESSAGE", "FAIL");
 
-		return num > 0 ? (Map<String, Object>) resultMap.put("MESSAGE", "SUCCESS") : (Map<String, Object>) resultMap.put("MESSAGE", "FAIL");
+		return resultMap;
 	}
 
 }
