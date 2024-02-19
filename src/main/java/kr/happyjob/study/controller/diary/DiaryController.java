@@ -80,5 +80,29 @@ public class DiaryController {
 	    
 	    return resultMap;
 	}
+	
+	// 삭제
+	@RequestMapping("delete.do")
+	@ResponseBody
+	public Map<String, Object> diaryDelete(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception {
+		
+		logger.info("+ Start " + className + ".diaryDelete");
+		logger.info("   - paramMap : " + paramMap);
+
+		String result = "SUCCESS";
+		String resultMsg = "삭제 되었습니다.";
+		
+		// 그룹코드 삭제
+		diaryService.diaryDelete(paramMap);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", result);
+		resultMap.put("resultMsg", resultMsg);
+		
+		logger.info("+ End " + className + ".noticeDelete");
+		
+		return resultMap;
+	}
 
 }

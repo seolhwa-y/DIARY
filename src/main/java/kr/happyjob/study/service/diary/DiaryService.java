@@ -32,4 +32,8 @@ public class DiaryService {
 		return mapper.diaryDetail(paramMap);
 	}
 	
+	public int diaryDelete(Map<String, Object> paramMap) throws Exception {
+
+		return mapper.diaryDelete(paramMap);
+	}
 }
