@@ -29,7 +29,6 @@ import kr.happyjob.study.vo.login.LoginVO;
 import kr.happyjob.study.vo.login.UserVO;
 import kr.happyjob.study.vo.login.LgnInfoModel;
 import kr.happyjob.study.vo.login.UsrMnuAtrtModel;
-import kr.happyjob.study.vo.login.UsrMnuChildAtrtModel;
 
 @Controller
 public class LoginController {
