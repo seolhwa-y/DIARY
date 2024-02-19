@@ -1,6 +1,7 @@
 package kr.happyjob.study.vo.diary;
 
 public class DiaryVO {
+	private String d_no;
 	private String loginId;
 	private String d_title;
 	private String d_weather;
@@ -9,6 +10,12 @@ public class DiaryVO {
 	private String d_diarydt;
 	private String d_regdate;
 	
+	public String getD_no() {
+		return d_no;
+	}
+	public void setD_no(String d_no) {
+		this.d_no = d_no;
+	}
 	public String getLoginId() {
 		return loginId;
 	}

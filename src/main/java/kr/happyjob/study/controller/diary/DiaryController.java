@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.happyjob.study.service.diary.DiaryService;
 import kr.happyjob.study.vo.diary.DiaryVO;
+import kr.happyjob.study.vo.notice.NoticeModel;
 
 
 @Controller
@@ -50,5 +51,34 @@ public class DiaryController {
 	    
 	    return resultMap;
 	}	
+	
+	// 상세조회
+	@RequestMapping("detail.do")
+	@ResponseBody
+	public Map<String,Object> detailDiary(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		logger.info("+ Start " + className + ".detailDiary");
+		logger.info("   - paramMap : " + paramMap);
+		  
+		String result="";
+		
+		// 선택된 게시판 1건 조회 
+		DiaryVO detailDiary = diaryService.diaryDetail(paramMap);
+		
+		if(detailDiary != null) {
+			result = "SUCCESS";  // 성공시 찍습니다. 
+		}else {
+			result = "FAIL / 불러오기에 실패했습니다.";  // null이면 실패입니다.
+		}
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("resultMsg", result); // success 용어 담기 
+		resultMap.put("result", detailDiary); // 리턴 값 해쉬에 담기 
+		System.out.println("detailDiary" + detailDiary);
+		
+		logger.info("+ End " + className + ".detailDiary");
+	    
+	    return resultMap;
+	}
 
 }

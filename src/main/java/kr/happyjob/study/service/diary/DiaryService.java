@@ -27,4 +27,9 @@ public class DiaryService {
         return mapper.diaryList(paramMap);
     }
 	
+	public DiaryVO diaryDetail(Map<String, Object> paramMap) throws Exception {
+
+		return mapper.diaryDetail(paramMap);
+	}
+	
 }

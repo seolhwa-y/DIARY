@@ -25,6 +25,27 @@
 		</where>
 		 ORDER BY d_diarydt DESC
 	</select>
+	
+	<!-- 단건 조회  -->
+	<select id = "diaryDetail" parameterType="java.util.Map" resultType="kr.happyjob.study.vo.diary.DiaryVO">
+		SELECT 
+		    d.d_no,
+		    u.loginID as loginId,
+		    d.d_title,
+		    dc_weather.detail_name AS d_weather,
+		    dc_mood.detail_name AS d_mood,
+		    d.d_contents,
+		    d.d_diarydt,
+		    d.d_regdate
+		FROM 
+		    tb_diary d
+		JOIN 
+		    tb_detail_code dc_weather ON d.d_weather = dc_weather.detail_code AND dc_weather.group_code = '2'
+		JOIN 
+		    tb_detail_code dc_mood ON d.d_mood = dc_mood.detail_code AND dc_mood.group_code = '1'
+		LEFT JOIN	tb_userinfo u ON d.loginID = u.loginID
+		WHERE d.d_no = #{d_no}
+	</select>
 
 
 </mapper>
