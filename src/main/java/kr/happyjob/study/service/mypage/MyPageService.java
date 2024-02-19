@@ -12,8 +12,8 @@ public class MyPageService {
 	@Autowired
 	private MyPageMapper mapper;
 	
-	public String getTell(Map<String, Object> paramMap) {
-		return mapper.getTell(paramMap);
+	public Map<String, Object> getInfo(Map<String, Object> paramMap) {
+		return mapper.getInfo(paramMap);
 	}
 
 	public int updInfo(Map<String, Object> paramMap) {

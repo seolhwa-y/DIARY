@@ -46,7 +46,7 @@ public class MyPageController {
 
 		paramMap.put("loginId", session.getAttribute("loginId"));
 
-		resultMap.put("tell", mps.getTell(paramMap));
+		resultMap.put("myInfo", mps.getInfo(paramMap));
 		
 		return resultMap;
 	}

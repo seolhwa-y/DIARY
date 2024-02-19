@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MyPageMapper {
-    String getTell(Map<String, Object> paramMap);
+    Map<String, Object> getInfo(Map<String, Object> paramMap);
 
     int updInfo(Map<String, Object> paramMap);
 
