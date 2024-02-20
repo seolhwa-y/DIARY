@@ -55,7 +55,8 @@
 	<!-- 신규등록(저장) :  -->
 	<insert id = "diaryInsert" parameterType="java.util.Map">
 	    <selectKey resultType="string" keyProperty="d_no" order="BEFORE">
-            SELECT IFNULL(MAX(d_no),0) + 1 FROM tb_diary 
+            SELECT max(CAST(d_no  as unsigned)) + 1 
+   FROM tb_diary
         </selectKey> 
 		INSERT
 		INTO		tb_diary
