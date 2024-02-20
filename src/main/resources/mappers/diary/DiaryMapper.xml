@@ -7,15 +7,13 @@
 		    d.d_no,
 		    d.loginID,
 		    d.d_title,
-		    dc_weather.detail_name AS d_weather,
+		    d.d_weather,
 		    dc_mood.detail_name AS d_mood,
 		    d.d_contents,
 		    d.d_diarydt,
 		    d.d_regdate
 		FROM 
 		    tb_diary d
-		JOIN 
-		    tb_detail_code dc_weather ON d.d_weather = dc_weather.detail_code AND dc_weather.group_code = '2'
 		JOIN 
 		    tb_detail_code dc_mood ON d.d_mood = dc_mood.detail_code AND dc_mood.group_code = '1'
 		WHERE 
@@ -34,15 +32,13 @@
 		    d.d_no,
 		    u.loginID as loginId,
 		    d.d_title,
-		    dc_weather.detail_name AS d_weather,
+		    d.d_weather,
 		    dc_mood.detail_name AS d_mood,
 		    d.d_contents,
 		    d.d_diarydt,
 		    d.d_regdate
 		FROM 
 		    tb_diary d
-		JOIN 
-		    tb_detail_code dc_weather ON d.d_weather = dc_weather.detail_code AND dc_weather.group_code = '2'
 		JOIN 
 		    tb_detail_code dc_mood ON d.d_mood = dc_mood.detail_code AND dc_mood.group_code = '1'
 		LEFT JOIN	tb_userinfo u ON d.loginID = u.loginID
@@ -55,5 +51,39 @@
 		FROM 	tb_diary
 		WHERE 	d_no = #{d_no}
 	</delete>
+	
+	<!-- 신규등록(저장) :  -->
+	<insert id = "diaryInsert" parameterType="java.util.Map">
+	    <selectKey resultType="string" keyProperty="d_no" order="BEFORE">
+            SELECT IFNULL(MAX(d_no),0) + 1 FROM tb_diary 
+        </selectKey> 
+		INSERT
+		INTO		tb_diary
+				(
+					d_no, loginID, d_title, d_weather, d_mood, d_contents, d_diarydt, d_regdate
+				)
+		VALUES
+				(
+						#{d_no}
+					,	#{loginId}
+					,	#{d_title}
+					,	#{d_weather}
+					,	#{d_mood}
+					,	#{d_contents}
+					,	#{d_diarydt}
+					,	NOW()
+				)
+	</insert>
+	
+	<!-- 수정-->
+	<update id = "diaryUpdate" parameterType="java.util.Map">
+		UPDATE tb_diary
+		SET		d_title = #{d_title},
+				d_weather = #{d_weather},
+				d_mood = #{d_mood},
+				d_contents = #{d_contents},
+				d_diarydt = #{d_diarydt}
+		WHERE	d_no = #{d_no}
+	</update>
 
 </mapper>

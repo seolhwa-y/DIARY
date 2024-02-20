@@ -15,5 +15,9 @@ public interface DiaryMapper {
 	public DiaryVO diaryDetail(Map<String, Object> paramMap);
 	
 	public int diaryDelete(Map<String, Object> paramMap);
+	
+	public int diaryInsert(Map<String, Object> paramMap);
+			
+	public int diaryUpdate(Map<String, Object> paramMap);
 
 }
