@@ -24,6 +24,7 @@ public class DiaryService {
 	private DiaryMapper mapper;
 
 	public List<DiaryVO> diaryList(Map<String, Object> paramMap){
+		String userId = (String) paramMap.get("userId"); // 파라미터에서 userId 가져오기
         return mapper.diaryList(paramMap);
     }
 	

@@ -18,6 +18,8 @@
 		    tb_detail_code dc_weather ON d.d_weather = dc_weather.detail_code AND dc_weather.group_code = '2'
 		JOIN 
 		    tb_detail_code dc_mood ON d.d_mood = dc_mood.detail_code AND dc_mood.group_code = '1'
+		WHERE 
+    		d.loginID = #{userId}
 		<where>
 			<if test ="(title != null) and (!title.equals(''))">
 			    and d.d_title  Like CONCAT('%', #{title}, '%')

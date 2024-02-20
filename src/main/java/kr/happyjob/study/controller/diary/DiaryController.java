@@ -43,6 +43,9 @@ public class DiaryController {
 		
 		logger.info("   - paramMap : " + paramMap);
 		String title = (String) paramMap.get("title");
+		String userId = (String) paramMap.get("userId"); // 세션에서 로그인 아이디 가져오기
+	    
+	    paramMap.put("userId", userId); // paramMap에 로그인 아이디 추가
 		
 		List<DiaryVO> list = diaryService.diaryList(paramMap);		
 		
