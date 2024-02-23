@@ -109,35 +109,50 @@ public class DiaryController {
 	@RequestMapping("Save.do")
 	@ResponseBody
 	public Map<String, Object> diarySave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		
-		logger.info("+ Start " + className + ".diarySave");
-		logger.info("   - paramMap : " + paramMap);
-		
-		String action = (String)paramMap.get("action");
-		String resultMsg = "";
-		
-		// 사용자 정보 설정
-		paramMap.put("loginId", session.getAttribute("loginId"));
-		
-		logger.info("loginId : " + paramMap.get("loginId"));
-		logger.info("action : " + paramMap.get("action"));
-		
-		if ("I".equals(action)) {
-			// 신규 저장
-			diaryService.diaryInsert(paramMap);
-			resultMsg = "SUCCESS";
-		} else if("U".equals(action)) {
-			// 수정
-			diaryService.diaryUpdate(paramMap);
-			resultMsg = "UPDATED";
-			System.out.println(paramMap);
-		} else {
-			resultMsg = "FALSE : 등록에 실패하였습니다.";
-		}
-		
-		//결과 값 전송
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("resultMsg", resultMsg);
+	    
+	    logger.info("+ Start " + className + ".diarySave");
+	    logger.info("   - paramMap : " + paramMap);
+	    
+	    String action = (String)paramMap.get("action");
+	    String resultMsg = "";
+	    
+	    // 사용자 정보 설정
+	    paramMap.put("loginId", session.getAttribute("loginId"));
+	    
+	    logger.info("loginId : " + paramMap.get("loginId"));
+	    logger.info("action : " + paramMap.get("action"));
+	    
+	    // 날짜 중복 확인
+	    String diaryDate = (String) paramMap.get("d_diarydt");
+	    Map<String, Object> dateCheckMap = new HashMap<>();
+	    dateCheckMap.put("loginId", session.getAttribute("loginId"));
+	    dateCheckMap.put("diaryDate", diaryDate);
+	    boolean isDateDuplicate = diaryService.isDateDuplicate(dateCheckMap);
+	    
+	    if ("I".equals(action)) {
+	        // 신규 저장
+	        if(isDateDuplicate) {
+	            resultMsg = "FAILED";
+	        } else {
+	            diaryService.diaryInsert(paramMap);
+	            resultMsg = "SUCCESS";
+	        }
+	    } else if("U".equals(action)) {
+	        // 수정
+	        if(isDateDuplicate) {
+	            resultMsg = "FAILED.";
+	        } else {
+	            diaryService.diaryUpdate(paramMap);
+	            resultMsg = "UPDATED";
+	            System.out.println(paramMap);
+	        }
+	    } else {
+	        resultMsg = "FALSE";
+	    }
+	    
+	    //결과 값 전송
+	    Map<String, Object> resultMap = new HashMap<String, Object>();
+	    resultMap.put("resultMsg", resultMsg);
 	    
 	    return resultMap;
 	}

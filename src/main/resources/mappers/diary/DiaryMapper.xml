@@ -84,5 +84,13 @@
 				d_diarydt = #{d_diarydt}
 		WHERE	d_no = #{d_no}
 	</update>
+	
+	<!-- 다이어리 날짜 중복 입력 불가 -->
+	<select id="isDateDuplicate" resultType="int" parameterType="java.util.Map">
+	    SELECT COUNT(*)
+	    FROM tb_diary
+	    WHERE loginID = #{loginId}
+	    AND d_diarydt = #{diaryDate}
+	</select>
 
 </mapper>

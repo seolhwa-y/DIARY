@@ -47,5 +47,12 @@ public class DiaryService {
 
 		return mapper.diaryUpdate(paramMap);
 	}
+	
+	public boolean isDateDuplicate(Map<String, Object> paramMap) {
+	    // Mapper를 통해 중복된 날짜가 있는지 확인하는 메소드 호출
+	    int count = mapper.isDateDuplicate(paramMap);
+	    // count가 0보다 크면 중복된 날짜가 있음을 의미
+	    return count > 0;
+	}
 
 }

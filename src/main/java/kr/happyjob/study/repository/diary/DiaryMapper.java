@@ -19,5 +19,8 @@ public interface DiaryMapper {
 	public int diaryInsert(Map<String, Object> paramMap);
 			
 	public int diaryUpdate(Map<String, Object> paramMap);
+	
+	public int isDateDuplicate(Map<String, Object> paramMap);
+
 
 }
