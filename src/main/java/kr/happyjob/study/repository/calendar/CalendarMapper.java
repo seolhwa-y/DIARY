@@ -6,14 +6,13 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.happyjob.study.vo.calendar.CalendarVO;
-import kr.happyjob.study.vo.diary.DiaryVO;
 
 @Mapper
 public interface CalendarMapper {
 	
 	public List<CalendarVO> calendarList(Map<String, Object> paramMap);
 	
-//	public DiaryVO diaryDetail(Map<String, Object> paramMap);
+	public CalendarVO calendarRead(Map<String, Object> paramMap);
 	
 //	public int diaryDelete(Map<String, Object> paramMap);
 	

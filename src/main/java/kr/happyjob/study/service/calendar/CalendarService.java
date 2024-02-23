@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.happyjob.study.vo.calendar.CalendarVO;
-import kr.happyjob.study.vo.diary.DiaryVO;
 import kr.happyjob.study.repository.calendar.CalendarMapper;
-import kr.happyjob.study.repository.diary.DiaryMapper;
 
 @Service
 public class CalendarService {
@@ -41,11 +39,11 @@ public class CalendarService {
 		return mapper.calendarUpdate(paramMap);
 	}
 	
-//	public DiaryVO diaryDetail(Map<String, Object> paramMap) throws Exception {
-//
-//		return mapper.diaryDetail(paramMap);
-//	}
-//	
+	public CalendarVO calendarRead(Map<String, Object> paramMap) throws Exception {
+
+		return mapper.calendarRead(paramMap);
+	}
+	
 //	public int diaryDelete(Map<String, Object> paramMap) throws Exception {
 //
 //		return mapper.diaryDelete(paramMap);

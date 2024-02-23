@@ -5,6 +5,7 @@ public class CalendarVO {
 	private String loginId;
 	private String s_contents;
 	private String s_date;
+	private String s__regdate;
 	
 	public String getS_no() {
 		return s_no;
@@ -36,7 +37,6 @@ public class CalendarVO {
 	public void setS__regdate(String s__regdate) {
 		this.s__regdate = s__regdate;
 	}
-	private String s__regdate;
 	
 	
 }
