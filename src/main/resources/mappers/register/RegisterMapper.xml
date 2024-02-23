@@ -6,14 +6,21 @@
 	 <select id="checkID" parameterType="string" resultType="int">
         SELECT COUNT(*) FROM tb_userinfo WHERE loginID = #{loginID}
     </select>
+    
+    <!--아이디 중복 검사-->
+	 <select id="checkEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM tb_userinfo WHERE email = #{email}
+    </select>
+    
+    
     <!--휴대폰 중복 검사-->
 	 <select id="checkHp" parameterType="string" resultType="int">
         SELECT COUNT(*) FROM tb_userinfo WHERE hp = #{hp}
     </select>
 	<!--회원 가입-->
 	<insert id="insertUser" parameterType="kr.happyjob.study.vo.register.UserVo">
-		INSERT INTO tb_userinfo (loginID, name, password, hp, user_type )
-		VALUES (#{loginID}, #{name}, #{password}, #{hp}, "A")
+		INSERT INTO tb_userinfo (loginID, name, password, hp, user_type, kakao, naver, google, email)
+		VALUES (#{loginID}, #{name}, #{password}, #{hp}, "A" ,#{kakao},#{naver},#{google},#{email})
 	</insert>
 	
 	<!--아이디 비밀번호 찾기-->

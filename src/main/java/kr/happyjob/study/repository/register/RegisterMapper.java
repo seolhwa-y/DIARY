@@ -15,6 +15,8 @@ public interface RegisterMapper {
      */
 	int checkID(String loginID);
 	
+	
+	int checkEmail(String loginEmail);
 	 /**
      * 휴대폰 번호 중복 검사
      * @param hp 검사할 휴대폰 번호 
@@ -44,6 +46,8 @@ public interface RegisterMapper {
 	 * @param password
 	 */
 	void updateUserPassword(String hp, String password);
+
+	
 	
 	
 	

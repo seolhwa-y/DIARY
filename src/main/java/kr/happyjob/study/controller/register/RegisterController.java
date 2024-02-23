@@ -34,6 +34,20 @@ public class RegisterController {
 		System.out.println("result : " + result);
 		return result;
 	}
+	
+	// 이메일 중복 검사
+		@PostMapping("checkEmail")
+		public int checkEmail(@RequestBody UserVo userVo) {
+
+
+			String loginEmail = userVo.getEmail();
+
+			System.out.println("이메일 : " + loginEmail);
+
+			int result = registerService.checkEmail(loginEmail);
+			System.out.println("result : " + result);
+			return result;
+		}
 
 	// 휴대폰 번호 중복 검사 / 가입유무
 	@PostMapping("checkHp")
@@ -78,7 +92,7 @@ public class RegisterController {
 	// 회원가입
 	@PostMapping("register")
 	public int register(@RequestBody UserVo userVo) {
-		System.out.println("빋은 값 : " + userVo);
+		System.out.println("받은 값 : " + userVo);
 		int result = registerService.register(userVo);
 
 		System.out.println("result : " + result);

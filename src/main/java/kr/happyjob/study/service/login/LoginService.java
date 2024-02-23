@@ -1,25 +1,21 @@
 package kr.happyjob.study.service.login;
 
-import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.happyjob.study.repository.login.ListUsrMnuAtrtMapper;
 import kr.happyjob.study.repository.login.LoginMapper;
-import kr.happyjob.study.repository.login.LoginProcMapper;
-import kr.happyjob.study.repository.login.ListUsrChildMnuAtrtMapper;
-import kr.happyjob.study.vo.login.LgnInfoModel;
 import kr.happyjob.study.vo.login.LoginVO;
 import kr.happyjob.study.vo.login.UserVO;
-import kr.happyjob.study.vo.login.UsrMnuAtrtModel;
-import kr.happyjob.study.vo.login.UsrMnuChildAtrtModel;
+import kr.happyjob.study.vo.register.UserVo;
 
 @Service
 public class LoginService {
+	
+	@Autowired
+	LoginMapper loginMapper;
 	
 	// Set logger
 	private final Logger logger = LogManager.getLogger(this.getClass());
@@ -33,6 +29,16 @@ public class LoginService {
 	
 	public UserVO login(LoginVO vo) {
 		return mapper.login(vo);
+	}
+	
+	public int selectUserInfo(String email) {
+		// TODO Auto-generated method stub
+		return loginMapper.selectUserInfo(email);
+	}
+
+	public UserVo phSelected(String email) {
+		// TODO Auto-generated method stub
+		return loginMapper.phSelected(email);
 	}
 	
 }

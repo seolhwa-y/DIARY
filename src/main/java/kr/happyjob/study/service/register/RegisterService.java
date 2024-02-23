@@ -21,6 +21,12 @@ public class RegisterService {
 
 		return registerMapper.checkID(loginID);
 	}
+	
+	// 이메일 중복 검사
+	public int checkEmail(String loginEmail) {
+		return registerMapper.checkEmail(loginEmail);
+	}
+
 
 	// 휴대폰 중복검사
 	public int checkHp(String hp) {
