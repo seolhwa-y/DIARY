@@ -44,10 +44,10 @@ public class CalendarService {
 		return mapper.calendarRead(paramMap);
 	}
 	
-//	public int diaryDelete(Map<String, Object> paramMap) throws Exception {
-//
-//		return mapper.diaryDelete(paramMap);
-//	}
+	public int calendarDelete(Map<String, Object> paramMap) throws Exception {
+
+		return mapper.calendarDelete(paramMap);
+	}
 	
 
 

@@ -14,7 +14,7 @@ public interface CalendarMapper {
 	
 	public CalendarVO calendarRead(Map<String, Object> paramMap);
 	
-//	public int diaryDelete(Map<String, Object> paramMap);
+	public int calendarDelete(Map<String, Object> paramMap);
 	
 	public int calendarInsert(Map<String, Object> paramMap);
 			

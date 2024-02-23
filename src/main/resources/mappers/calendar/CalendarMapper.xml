@@ -52,10 +52,10 @@
 	</select>
 	   
 	<!-- 삭제-->
-	<delete id="diaryDelete" parameterType="java.util.Map">
+	<delete id="calendarDelete" parameterType="java.util.Map">
 		DELETE
-		FROM 	tb_diary
-		WHERE 	d_no = #{d_no}
+		FROM 	tb_schedule
+		WHERE 	s_date = #{s_date}
 	</delete>
 	
 	<!-- 수정-->
