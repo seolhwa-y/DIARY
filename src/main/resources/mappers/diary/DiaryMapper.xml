@@ -23,7 +23,7 @@
 			</if>	
 		 ORDER BY d_diarydt DESC
 	</select>
-	
+	   
 	<!-- 단건 조회  -->
 	<select id = "diaryDetail" parameterType="java.util.Map" resultType="kr.happyjob.study.vo.diary.DiaryVO">
 		SELECT 

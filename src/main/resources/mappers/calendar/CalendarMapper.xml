@@ -55,7 +55,7 @@
 		LEFT JOIN	tb_userinfo u ON d.loginID = u.loginID
 		WHERE d.d_no = #{d_no}
 	</select>
-	
+	   
 	<!-- 삭제-->
 	<delete id="diaryDelete" parameterType="java.util.Map">
 		DELETE
