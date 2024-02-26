@@ -1,5 +1,7 @@
 package kr.happyjob.study.controller.login;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -25,8 +27,10 @@ public class SocialLoginController {
 
 	@Autowired
 	LoginService loginService;
-	
-	// 네이버 토큰 발급 및 사용자 조회
+
+	@Autowired
+	HttpSession session;
+
 	@GetMapping("/api/auth/naver")
 	public ResponseEntity<?> naverLogin(@RequestParam String code, @RequestParam String state) {
 		System.out.println("Code: " + code);
@@ -54,6 +58,9 @@ public class SocialLoginController {
 		JSONObject tokenResponse = new JSONObject(response.getBody());
 		String accessToken = tokenResponse.getString("access_token");
 		String tokenType = tokenResponse.getString("token_type");
+
+		session.setAttribute("access_token", accessToken);
+		System.out.println("accessToken :: " + accessToken);
 
 		// 사용자 정보 요청
 		HttpHeaders userInfoHeaders = new HttpHeaders();
