@@ -11,6 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+<<<<<<< HEAD
+=======
+
+import java.net.URI;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+>>>>>>> 4cd4dd1 (dd)
 
 
 @RestController
@@ -20,6 +28,10 @@ public class LogOutController {
 	@Autowired
 	HttpSession session;
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 4cd4dd1 (dd)
 	@PostMapping("logout")
 	public void logout() {
 		session.invalidate(); // 세션 무효화

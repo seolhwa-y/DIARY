@@ -27,10 +27,17 @@ public class SocialLoginController {
 
 	@Autowired
 	LoginService loginService;
+<<<<<<< HEAD
 
 	@Autowired
 	HttpSession session;
 
+=======
+	@Autowired
+	HttpSession session;
+
+	// 네이버 토큰 발급 및 사용자 조회
+>>>>>>> 4cd4dd1 (dd)
 	@GetMapping("/api/auth/naver")
 	public ResponseEntity<?> naverLogin(@RequestParam String code, @RequestParam String state) {
 		System.out.println("Code: " + code);
