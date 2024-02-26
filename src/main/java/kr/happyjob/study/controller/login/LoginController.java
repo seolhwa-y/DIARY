@@ -51,45 +51,14 @@ public class LoginController {
 
 	@Autowired
 	private ListUsrMnuAtrtService listUsrMnuAtrtService;
-	
-	@GetMapping("/login")
-	public ModelAndView loginPage() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("login");
-		return mv;
-	}
 
-	@PostMapping("/login")
-	@ResponseBody
-	public Map<String, Object> login(LoginVO vo) throws Exception {
-		logger.info("login start");
-		logger.info("inputId / inputPw");
-		logger.info(vo.getId() + " / " + vo.getPw());
-		UserVO userVo = new UserVO();
-		Map<String, Object> resultMap = new HashMap<>();
-		try {
-			userVo = service.login(vo);
-			if (userVo == null) {
-				resultMap.put("resCode", "F");
-				resultMap.put("resMsg", "로그인 실패");
-			} else {
-				resultMap.put("resCode", "S");
-				resultMap.put("resMsg", "로그인 성공");
-				//userVo = service.login(vo);
-				logger.info("userVo");
-				logger.info(userVo.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return resultMap;
-	}
-	
 	@RequestMapping("/loginProc.do")
 	@ResponseBody
 	public Map<String, Object> loginProc(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
 	         HttpServletResponse response, HttpSession session) throws Exception {
-
+		
+		System.out.println("세션에 저장된 로그인 아이디" + session.getAttribute("loginId"));
+		
 	      logger.info("+ Start LoginController.loginProc.do");
 		  logger.info("   - ParamMap : " + paramMap);
 		    
@@ -133,6 +102,7 @@ public class LoginController {
 			  	       session.setAttribute("usrMnuAtrt", listUsrMnuAtrtModel);
 			  	       session.setAttribute("userType", lgnInfoModel.getMem_author());            // 로그린 사용자 권란       A: 관리자       B: 기업회원    C:일반회원
 			  	       session.setAttribute("serverName", request.getServerName());
+			  	       
 			  	
 			  	       resultMap.put("loginId",lgnInfoModel.getLgn_id()); 
 			  	       resultMap.put("userNm",lgnInfoModel.getUsr_nm()); 

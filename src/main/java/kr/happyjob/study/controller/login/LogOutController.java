@@ -16,7 +16,7 @@ public class LogOutController {
 
 	 @PostMapping("logout")
 	    public void logout() {
-//		  session.invalidate(); // 세션 무효화
+		  session.invalidate(); // 세션 무효화
 	    }
 	 
 	

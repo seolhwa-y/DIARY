@@ -25,7 +25,8 @@ public class SocialLoginController {
 
 	@Autowired
 	LoginService loginService;
-
+	
+	// 네이버 토큰 발급 및 사용자 조회
 	@GetMapping("/api/auth/naver")
 	public ResponseEntity<?> naverLogin(@RequestParam String code, @RequestParam String state) {
 		System.out.println("Code: " + code);
@@ -66,16 +67,7 @@ public class SocialLoginController {
 		JSONObject userInfo = userResponse.getJSONObject("response");
 
 		System.out.println("유저 정보 : " + userInfo);
-		// 사용자 정보 출력 (예: ID, 이메일)
-//	        System.out.println("User ID: " + userInfo.getString("id"));
-//	        System.out.println("User Email: " + userInfo.getString("email"));
-		// 전화번호 값
-//		String mobile = userInfo.getString("mobile");
-		// 유저 닉네임
-
-//	        하이픈 제거
-//		String ph = mobile.replace("-", "");
-//		System.out.println("ph : " + ph);
+	
 		// 이메일
 		String email = userInfo.getString("email");
 		// 회원 조회
@@ -107,7 +99,7 @@ public class SocialLoginController {
 	}
 	
 	
-	//
+	//소숄 로그인
 	@PostMapping("/api/login")
 	public UserVo phSelected(@RequestBody UserVo userVo) {
 		System.out.println("userVo : " + userVo);

@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.happyjob.study.service.diary.DiaryService;
 import kr.happyjob.study.vo.diary.DiaryVO;
-import kr.happyjob.study.vo.notice.NoticeModel;
-
 
 @Controller
 @RequestMapping("/diary/")
@@ -144,4 +142,6 @@ public class DiaryController {
 	    return resultMap;
 	}
 
+
+    
 }
