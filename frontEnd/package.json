@@ -1,0 +1,87 @@
+{
+    "name": "vueframework",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": { // cd frontEnd && npm run start:both
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "spring": "/usr/bin/env /Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home/bin/java @/var/folders/rw/q5qh2v5j6sqcn28ts3xr8whh0000gn/T/cp_2zkserkv7dttdcvh9xw7zpd2i.argfile kr.happyjob.study.Happyjob3Application",
+        "start": "concurrently \"npm run spring\" \"npm run serve\""
+    },
+    "dependencies": {
+        "@element-plus/icons-vue": "^2.3.1",
+        "@tiptap/starter-kit": "^2.2.2",
+        "@tiptap/vue-3": "^2.2.2",
+        "axios": "^0.25.0",
+        "bootstrap": "^4.6.1",
+        "bootstrap-vue": "^2.21.2",
+        "concurrently": "^8.2.2",
+        "core-js": "^3.6.5",
+        "cors": "^2.8.5",
+        "dayjs": "^1.10.8",
+        "element-plus": "^2.5.5",
+        "jenesius-vue-modal": "^1.4.7",
+        "jshint": "^2.13.4",
+        "mitt": "^3.0.0",
+        "moment": "^2.29.1",
+        "v-calendar": "^3.0.0-alpha.8",
+        "volar-service-vetur": "^0.0.17",
+        "vue": "^3.2.31",
+        "vue-daum-postcode": "^1.1.0",
+        "vue-persistedstate": "^1.2.5",
+        "vue-router": "^4.0.0-0",
+        "vue-session": "^1.0.0",
+        "vue3-date-time-picker": "^2.8.0",
+        "vue3-datepicker": "^0.3.2",
+        "vue3-quill": "^0.3.1",
+        "vue3-slide-up-down": "^1.2.5",
+        "vuejs-paginate": "^2.1.0",
+        "vuejs-paginate-next": "^1.0.2",
+        "vuex": "^4.0.0-0",
+        "vuex-persistedstate": "^4.1.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-router": "~4.5.0",
+        "@vue/cli-plugin-vuex": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/compiler-sfc": "^3.0.0",
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.7.2",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-vue": "^7.0.0",
+        "prettier": "^2.2.1",
+        "unplugin-auto-import": "^0.17.5",
+        "unplugin-vue-components": "^0.26.0"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/vue3-essential",
+            "eslint:recommended",
+            "@vue/prettier"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {
+            "prettier/prettier": [
+                "error",
+                {
+                    "endOfLine": "auto"
+                }
+            ]
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}
